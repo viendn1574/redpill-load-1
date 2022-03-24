@@ -45,11 +45,11 @@ jobs:
 
           tar -C./synoesp/ -xf oldpat.tar.gz rd.gz
           cd synoesp
-          xz -dc < rd.gz >rd 2>/dev/null || echo "0"
+          xz -dc < rd.gz >rd 2>/dev/null || echo "extract rd.gz"
           echo "finish"
           ls -lh rd
-          output=$(cpio -idm <rd 2>&1)
-          echo $output
+          cpio -idm <rd 2>&1 || echo "extract rd"
+          ls -lh ./
           mkdir extract && cd extract
           cp ../usr/lib/libcurl.so.4 ../usr/lib/libmbedcrypto.so.5 ../usr/lib/libmbedtls.so.13 ../usr/lib/libmbedx509.so.1 ../usr/lib/libmsgpackc.so.2 ../usr/lib/libsodium.so ../usr/lib/libsynocodesign-ng-virtual-junior-wins.so.7 ../usr/syno/bin/scemd ./
           ln -s scemd syno_extract_system_patch
