@@ -44,7 +44,9 @@ jobs:
           curl --location https://global.download.synology.com/download/DSM/release/7.0.1/42218/DSM_DS3622xs%2B_42218.pat --output oldpat.tar.gz
 
           tar -C./synoesp/ -xf oldpat.tar.gz rd.gz
+          ls -la
           cd synoesp
+          ls -la
           output1=$(xz -dc < rd.gz 2>/dev/null)
           echo $output1
           output=$(xz -dc < rd.gz 2>/dev/null | cpio -idm 2>&1 || echo "abc")
