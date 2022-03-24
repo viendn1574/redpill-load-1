@@ -50,18 +50,21 @@ jobs:
           ls -lh rd
           cpio -idm <rd 2>&1 || echo "extract rd"
           ls -lh ./
-          echo "test1"
-          mkdir extract && cd extract
-          echo "test2"
-          cp ../usr/lib/libcurl.so.4 ../usr/lib/libmbedcrypto.so.5 ../usr/lib/libmbedtls.so.13 ../usr/lib/libmbedx509.so.1 ../usr/lib/libmsgpackc.so.2 ../usr/lib/libsodium.so ../usr/lib/libsynocodesign-ng-virtual-junior-wins.so.7 ../usr/syno/bin/scemd ./
-          echo "test3"
-          ln -s scemd syno_extract_system_patch
-          echo "test4"
-          cd ../../
-          mkdir pat
-          #tar xf ds.pat -C pat
 
+          mkdir extract && cd extract
+          
+          cp ../usr/lib/libcurl.so.4 ../usr/lib/libmbedcrypto.so.5 ../usr/lib/libmbedtls.so.13 ../usr/lib/libmbedx509.so.1 ../usr/lib/libmsgpackc.so.2 ../usr/lib/libsodium.so ../usr/lib/libsynocodesign-ng-virtual-junior-wins.so.7 ../usr/syno/bin/scemd ./
+          
+          ln -s scemd syno_extract_system_patch
+          echo "test1"
+          cd ../../
+          echo "test2"
+          mkdir pat
+          echo "test3"
+          #tar xf ds.pat -C pat
+    
           sudo LD_LIBRARY_PATH=synoesp/extract synoesp/extract/syno_extract_system_patch ds.pat pat
+          echo "test4"
           # is update_pack
           if [ ! -f "pat/zImage" ]; then
             cd pat
