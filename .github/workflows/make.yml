@@ -55,8 +55,7 @@ jobs:
           mkdir pat
           #tar xf ds.pat -C pat
           ls -lh ./
-          sudo LD_LIBRARY_PATH=synoesp/extract synoesp/extract/syno_extract_system_patch
-          sudo LD_LIBRARY_PATH=synoesp/extract synoesp/extract/syno_extract_system_patch ds.pat pat
+          sudo LD_LIBRARY_PATH=synoesp/extract synoesp/extract/syno_extract_system_patch ds.pat pat || echo "extract latest pat"
           echo "test4"
           # is update_pack
           if [ ! -f "pat/zImage" ]; then
@@ -65,6 +64,7 @@ jobs:
             tar xf data.tar.xz
             cd ..
           fi
+          echo "test5"
           mkdir toolchain
           tar xf toolchain.txz -C toolchain
           mkdir linux-src
