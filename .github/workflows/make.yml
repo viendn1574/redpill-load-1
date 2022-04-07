@@ -3,10 +3,14 @@ name: Make kernel bs patch
 on:
   workflow_dispatch:
     inputs:
-      pat-address:
-        description: 'Pat file URL'
+      dsmodel:
+        description: 'Input Full DSM model [DS3622xs+|RS4021xs+|DVA3221|DS918+|DS920+|DS3615xs]'
         required: true
-        default: 'https://cndl.synology.cn/download/DSM/release/7.0.1/42218/DSM_DS3622xs+_42218.pat'
+        default: 'DS3622xs+'
+      os_version:
+        description: 'Must build DSM7.1 and after DSM versions'
+        required: true
+        default: '42621'
       toolchain:
         description: 'DSM toolchain URL for repack zImage'
         required: true
@@ -26,6 +30,8 @@ jobs:
         env:
             ACTIONS_STEP_DEBUG: true
         run: |
+          dsmodel=${{github.event.inputs.dsmodel}}
+          os_version=${{github.event.inputs.os_version}}
           patfile=$(basename ${{github.event.inputs.pat-address}} | while read; do echo -e ${REPLY//%/\\x}; done)
           echo "::set-output name=patfile::$patfile"
           # install bsdiff
