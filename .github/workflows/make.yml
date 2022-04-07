@@ -138,6 +138,11 @@ jobs:
           cp diff.bsp /opt/dist
           cp checksum.sha256 /opt/dist
           echo '---END---'
+          git clone -b develop --depth=1 https://github.com/dogodefi/redpill-load.git
+          cd redpill-load
+          mkdir -p config/${dsmodel} && cd config/${dsmodel}
+          cp ../template/config.json ./
+          sed -i "s/os_version_template/${os_version}/g; s/zlinux_sha256/${zlinux_sha256}/" config.json
       - name: Upload
         uses: actions/upload-artifact@v2
         with:
