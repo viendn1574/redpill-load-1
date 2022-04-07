@@ -80,10 +80,9 @@ jobs:
           # extract vmlinux
           ./linux-src/scripts/extract-vmlinux pat/zImage > vmlinux
           # sha256
-          sha256sum ds.pat >> checksum.sha256
-          sha256sum pat/zImage >> checksum.sha256
-          sha256sum pat/rd.gz >> checksum.sha256
-          sha256sum vmlinux >> checksum.sha256
+          zlinux_sha256=`sha256sum pat/zImage`; echo ${zlinux_sha256} >> checksum.sha256
+          ramdisk_sha256=`sha256sum pat/rd.gz`; echo ${ramdisk_sha256} >> checksum.sha256
+          vmlinux_sha256=`sha256sum vmlinux`; echo ${vmlinux_sha256} >> checksum.sha256
           # patch vmlinux
           # vmlinux_mod.bin
           curl -L https://github.com/jumkey/dsm-research/raw/master/tools/common.php -o common.php
