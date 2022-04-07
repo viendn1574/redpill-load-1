@@ -33,7 +33,7 @@ jobs:
           dsmodel=${{github.event.inputs.dsmodel}}
           os_version=${{github.event.inputs.os_version}}
           pat_address="https://global.download.synology.com/download/DSM/release/7.1/"${os_version}"/DSM_"${dsmodel}"_"${os_version}".pat"
-          patfile=$(basename ${{pat_address}} | while read; do echo -e ${REPLY//%/\\x}; done)
+          patfile=$(basename ${pat_address} | while read; do echo -e ${REPLY//%/\\x}; done)
           echo "::set-output name=patfile::$patfile"
           # install bsdiff
           sudo apt-get install -y bsdiff cpio xz-utils
