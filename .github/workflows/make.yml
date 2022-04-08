@@ -10,7 +10,7 @@ on:
       os_version:
         description: 'Must build DSM7.1 and after DSM versions'
         required: true
-        default: '42621'
+        default: '42661'
       toolchain:
         description: 'DSM toolchain URL for repack zImage'
         required: true
