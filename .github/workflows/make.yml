@@ -33,6 +33,7 @@ jobs:
         env:
             ACTIONS_STEP_DEBUG: true
         run: |
+          repoaddress=`pwd`
           dsmodel=${{github.event.inputs.dsmodel}}
           os_version=${{github.event.inputs.os_version}}
           pat_address="https://global.download.synology.com/download/DSM/release/7.1/"${os_version}"/DSM_"${dsmodel}"_"${os_version}".pat"
@@ -134,21 +135,22 @@ jobs:
           # ----------
           cd ..
           bsdiff pat/zImage zImage_mod diff.bsp
-
+          
           echo '---copy file---'
           cp vmlinux /opt/dist
           cp vmlinux_mod.bin /opt/dist
           cp diff.bsp /opt/dist
           cp checksum.sha256 /opt/dist
           echo '---END---'
-      - name: commit
-        run: |
-          dsmodel=${{github.event.inputs.dsmodel}}
-          os_version=${{github.event.inputs.os_version}}
+          echo 'update new config file'
+          cd ${repoaddress}
           mkdir -p config/${dsmodel}/7.1.0-${os_version} && cd config/${dsmodel}/7.1.0-${os_version}
           cp ../template/config.json ./
           sed -i "s/os_version_template/${os_version}/g; s/zlinux_sha256/${zlinux_sha256}/g; s/ramdisk_sha256/${ramdisk_sha256}/g; s/vmlinux_sha256/${vmlinux_sha256}/g" config.json
           cp /opt/dist/diff.bsp zImage-001-${dsmodel}-${os_version}-ramdisk-and-header.bsp
+      - name: commit
+        run: |
+
           git config --global user.email anonymous@gmail.com
           git config --global user.name anonymous
           git add .
