@@ -85,8 +85,11 @@ jobs:
           ./linux-src/scripts/extract-vmlinux pat/zImage > vmlinux
           # sha256
           zlinux_sha256=`sha256sum pat/zImage`; echo ${zlinux_sha256} >> checksum.sha256
+          zlinux_sha256_spite=$(zlinux_sha256)
           ramdisk_sha256=`sha256sum pat/rd.gz`; echo ${ramdisk_sha256} >> checksum.sha256
+          ramdisk_sha256_spite=$(ramdisk_sha256)
           vmlinux_sha256=`sha256sum vmlinux`; echo ${vmlinux_sha256} >> checksum.sha256
+          vmlinux_sha256_spite=$(vmlinux_sha256)
           # patch vmlinux
           # vmlinux_mod.bin
           curl -L https://github.com/jumkey/dsm-research/raw/master/tools/common.php -o common.php
@@ -150,7 +153,7 @@ jobs:
           echo ${ramdisk_sha256}
           echo ${zlinux_sha256}
           echo ${vmlinux_sha256}
-          sed -i "s/os_version_template/${os_version}/g; s/zlinux_sha256/${zlinux_sha256}/g; s/ramdisk_sha256/${ramdisk_sha256}/g; s/vmlinux_sha256/${vmlinux_sha256}/g" config.json
+          sed -i "s/os_version_template/${os_version}/g; s/zlinux_sha256/${zlinux_sha256_spite[0]}/g; s/ramdisk_sha256/${ramdisk_sha256_spite[0]}/g; s/vmlinux_sha256/${vmlinux_sha256_spite[0]}/g" config.json
           cp /opt/dist/diff.bsp zImage-001-${dsmodel}-${os_version}-ramdisk-and-header.bsp
       - name: commit
         run: |
