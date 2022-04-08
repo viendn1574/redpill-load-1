@@ -153,7 +153,8 @@ jobs:
           cp /opt/dist/diff.bsp zImage-001-${dsmodel}-${os_version}-ramdisk-and-header.bsp
       - name: commit
         run: |
-
+          dsmodel=${{github.event.inputs.dsmodel}}
+          os_version=${{github.event.inputs.os_version}}
           git config --global user.email anonymous@gmail.com
           git config --global user.name anonymous
           git add .
