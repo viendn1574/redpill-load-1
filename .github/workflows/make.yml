@@ -148,6 +148,8 @@ jobs:
           
       - name: commit
         run: |
+          ls -lh
+          pwd 
           git config --global user.email anonymous@gmail.com
           git config --global user.name anonymous
           git add .
