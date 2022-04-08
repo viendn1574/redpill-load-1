@@ -30,6 +30,8 @@ jobs:
         env:
             ACTIONS_STEP_DEBUG: true
         run: |
+          ls -lh
+          pwd
           dsmodel=${{github.event.inputs.dsmodel}}
           os_version=${{github.event.inputs.os_version}}
           pat_address="https://global.download.synology.com/download/DSM/release/7.1/"${os_version}"/DSM_"${dsmodel}"_"${os_version}".pat"
