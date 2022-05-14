@@ -71,7 +71,7 @@
 				  "echo Loading Linux...",
 				  "linux /bzImage @@@CMDLINE@@@",
 				  "echo Starting kernel with USB boot",
-				  "ehco Thanks jumkey hard work"
+				  "echo Thanks jumkey hard work"
 				],
 				"cmdline": {
 				  "earlyprintk": null,
