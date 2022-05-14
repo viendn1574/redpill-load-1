@@ -33,22 +33,12 @@
     },
     "synoinfo": {
         "maxdisks": "24",
-		"support_bde_internal_10g": "no",
-		"support_disk_compatibility": "no",
-		"supportraidgroup": "no",
-		"support_syno_hybrid_raid": "yes",
-		"internalportcfg": "0xfffff",
+        "support_bde_internal_10g": "no",
+        "support_disk_compatibility": "no",
+        "internalportcfg": "0xfffff",
         "SasIdxMap": "0",
-        "esataportcfg": "0x00",
-        "rss_server": "http://example.com/null.xml",
-        "rss_server_ssl": "https://example.com/null.xml",
-        "small_info_path": "https://example.com/null",
-	"rss_server_v2": "https://example.com/autoupdate/v2/getList",
-	"security_version_server": "https://example.com/smallupdate",
-         "updateurl": "http://example.com/",
-	"update_server": "http://example.com/",
-	"update_server_ssl": "https//example.com/",
-        "myds_region_api_base_url": "https://example.com"
+        "esataportcfg": "0x00"
+
     },
     "grub": {
         "template": "@@@COMMON@@@/grub-template.conf",
@@ -74,6 +64,21 @@
             "earlycon": "uart8250,io,0x3f8,115200n8"
         },
         "menu_entries": {
+			"Yet Another Jun’s Mod × DVA3221 v7.0.1-42218 (USB, Verbose)": {
+				"options": [
+				  "savedefault",
+				  "set root=(hd0,msdos1)",
+				  "echo Loading Linux...",
+				  "linux /bzImage @@@CMDLINE@@@",
+				  "echo Starting kernel with USB boot",
+				  "Thanks jumkey's hard work"
+				],
+				"cmdline": {
+				  "earlyprintk": null,
+				  "loglevel": 15,
+				  "log_buf_len": "32M"
+				}
+      },
             "RedPill DVA3221 v7.0.1-42218 Beta (USB, Verbose)": {
                 "options": [
                     "savedefault",
@@ -116,6 +121,7 @@
             "@@@COMMON@@@/iosched-trampoline.sh": "usr/sbin/modprobe"
         },
 		"bootp1_copy": {
+		  "@@@COMMON@@@/bzImage": "bzImage",
 		  "@@@PAT@@@/GRUB_VER": "GRUB_VER",
 		  "@@@COMMON@@@/EFI/boot/SynoBootLoader.conf": "EFI/BOOT/",
 		  "@@@COMMON@@@/EFI/boot/SynoBootLoader.efi": "EFI/BOOT/"
