@@ -9,7 +9,7 @@ wait_time=30
 time_counter=0
 while [ "${usbfs}" = "" ] && [ $time_counter -lt $wait_time ]; do
   sleep 1
-  usbfs=$(fdisk -l /dev/sd* | grep '128 MB' | awk '{print $2}' | awk -F ':' '{print $1}')
+  usbfs=$(fdisk -l /dev/sd* | grep -E '128 MB|160 MB' | awk '{print $2}' | awk -F ':' '{print $1}')
   echo "Still waiting for boot device (waited $((time_counter=time_counter+1)) of ${wait_time} seconds)"
 done
 mount ${usbfs}1 /temp1
