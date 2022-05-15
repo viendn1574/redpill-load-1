@@ -27,17 +27,12 @@
         "ramdisk": [
             "@@@COMMON@@@/ramdisk-001-disable-root-pwd.patch",
       	    "@@@COMMON@@@/v7.0.1/ramdisk-002-init-script.patch",
-            "@@@COMMON@@@/v7.0.1/ramdisk-003-post-init-script.patch",
-	    "@@@COMMON@@@/ramdisk-004-network-hosts.patch"
+            "@@@COMMON@@@/v7.0.1/ramdisk-003-post-init-script.patch"
         ]
     },
     "synoinfo": {
-        "maxdisks": "24",
         "support_bde_internal_10g": "no",
-        "support_disk_compatibility": "no",
-        "internalportcfg": "0xfffff",
-        "SasIdxMap": "0",
-        "esataportcfg": "0x00"
+        "support_disk_compatibility": "no"
 
     },
     "grub": {
@@ -46,8 +41,6 @@
             "sn": "",
             "vid": "0x46f4",
             "pid": "0x0001",
-    	    "SataPortMap": "1", 
-            "DiskIdxMap": "0",
             "mac1": "",
             "netif_num": 4,
 
