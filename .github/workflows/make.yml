@@ -27,14 +27,34 @@ jobs:
           echo "::set-output name=patfile::$patfile"
           # install bsdiff
           sudo apt-get install -y bsdiff
+          sudo apt-get update && sudo apt-get install --yes --no-install-recommends ca-certificates build-essential git libssl-dev curl cpio bspatch vim gettext bc bison flex dosfstools kmod jq
 
           #ls -al $GITHUB_WORKSPACE/
           mkdir /opt/build
           mkdir /opt/dist
           cd /opt/build
-          curl -L ${{github.event.inputs.pat-address}} -o ds.pat
+          curl -L ${{github.event.inputs.pat-address}} -o ds_old.pat
           curl -L ${{github.event.inputs.toolchain}} -o toolchain.txz
           curl -L ${{github.event.inputs.linux-src}} -o linux.tar.xz
+          
+          
+          # old pat form unzip
+          mkdir synoesp
+          curl --location https://global.download.synology.com/download/DSM/release/7.0.1/42218/DSM_DS3622xs%2B_42218.pat --output oldpat.tar.gz
+          tar -C./synoesp/ -xf oldpat.tar.gz rd.gz
+          cd synoesp
+          output=$(xz -dc < rd.gz 2>/dev/null | cpio -idm 2>&1)
+          mkdir extract && cd extract
+          cp ../usr/lib/libcurl.so.4 ../usr/lib/libmbedcrypto.so.5 ../usr/lib/libmbedtls.so.13 ../usr/lib/libmbedx509.so.1 ../usr/lib/libmsgpackc.so.2 ../usr/lib/libsodium.so ../usr/lib/libsynocodesign-ng-virtual-junior-wins.so.7 ../usr/syno/bin/scemd ./
+          ln -s scemd syno_extract_system_patch
+          cp /opt/build/ds_old.pat ./ds.pat
+          sudo LD_LIBRARY_PATH=. ./syno_extract_system_patch ds.pat output-pat
+
+          cd output-pat && sudo tar -zcvf ds.pat * && sudo chmod 777 ds.pat
+          read -a os_sha256 <<< $(sha256sum ds.pat)
+          echo $os_sha256
+          cp ds.pat /opt/build/ds.pat
+          cd /opt/build
           mkdir pat
           tar xf ds.pat -C pat
           # is update_pack
