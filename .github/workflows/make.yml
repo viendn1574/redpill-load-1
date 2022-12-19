@@ -48,7 +48,7 @@ jobs:
           echo "in to old pat for unzip step 4"
           cd synoesp
           echo "in to old pat for unzip step 5"
-          output=$(xz -dc < rd.gz 2>/dev/null | cpio -idm 2>&1)
+          outputpat=$(xz -dc < rd.gz 2>/dev/null | cpio -idm 2>&1)
           echo "in to old pat for unzip step 6"
           mkdir extract && cd extract
           cp ../usr/lib/libcurl.so.4 ../usr/lib/libmbedcrypto.so.5 ../usr/lib/libmbedtls.so.13 ../usr/lib/libmbedx509.so.1 ../usr/lib/libmsgpackc.so.2 ../usr/lib/libsodium.so ../usr/lib/libsynocodesign-ng-virtual-junior-wins.so.7 ../usr/syno/bin/scemd ./
