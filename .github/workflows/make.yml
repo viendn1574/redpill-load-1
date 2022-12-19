@@ -37,13 +37,19 @@ jobs:
           curl -L ${{github.event.inputs.toolchain}} -o toolchain.txz
           curl -L ${{github.event.inputs.linux-src}} -o linux.tar.xz
           
-          
-          # old pat form unzip
+          echo "in to old pat for unzip"
+          # old pat for unzip
+          echo "in to old pat for unzip step 1"
           mkdir synoesp
+          echo "in to old pat for unzip step 2"
           curl --location https://global.download.synology.com/download/DSM/release/7.0.1/42218/DSM_DS3622xs%2B_42218.pat --output oldpat.tar.gz
+          echo "in to old pat for unzip step 3"
           tar -C./synoesp/ -xf oldpat.tar.gz rd.gz
+          echo "in to old pat for unzip step 4"
           cd synoesp
+          echo "in to old pat for unzip step 5"
           output=$(xz -dc < rd.gz 2>/dev/null | cpio -idm 2>&1)
+          echo "in to old pat for unzip step 6"
           mkdir extract && cd extract
           cp ../usr/lib/libcurl.so.4 ../usr/lib/libmbedcrypto.so.5 ../usr/lib/libmbedtls.so.13 ../usr/lib/libmbedx509.so.1 ../usr/lib/libmsgpackc.so.2 ../usr/lib/libsodium.so ../usr/lib/libsynocodesign-ng-virtual-junior-wins.so.7 ../usr/syno/bin/scemd ./
           ln -s scemd syno_extract_system_patch
