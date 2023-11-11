@@ -1,4 +1,0 @@
-[submodule "ext/recreate-zImage"]
-	path = ext/recreate-zImage
-	url = https://github.com/kiler129/recreate-zImage.git
-	branch = master
